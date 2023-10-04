@@ -1,0 +1,5 @@
+graft protected_route/templates
+graft protected_route/translations
+graft protected_route/migrations
+
+global-exclude *.pyc __pycache__ .keep
