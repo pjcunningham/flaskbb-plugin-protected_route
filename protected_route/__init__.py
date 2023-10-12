@@ -53,7 +53,6 @@ allowed_endpoints = (
     'static',
     '_themes.static',
     'auth.login',
-    'forum.index',
 )
 
 
