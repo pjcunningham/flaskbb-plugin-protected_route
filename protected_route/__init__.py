@@ -49,23 +49,11 @@ def flaskbb_tpl_before_navigation():
     return render_template("protected_route_navlink.html")
 
 
-# plugin settings
-SETTINGS = {
-    "foobar": {
-        "value": 10,
-        "value_type": SettingValueType.integer,
-        "name": "Foobar Number",
-        "description": "The number of foo in bars.",
-        "extra": {"min": 1},
-    },
-}
-
-endpoints = (
-    'forum.memberlist',
-    'forum.search',
-    'user.profile',
-    'user.view_all_topics',
-    'user.view_all_posts',
+allowed_endpoints = (
+    'static',
+    '_themes.static',
+    'auth.login',
+    'forum.index',
 )
 
 
@@ -77,6 +65,5 @@ def flaskbb_request_processors(app):
     def before_request():
         """Check authentication before request is handled."""
 
-        if (request.endpoint in endpoints
-                and not current_user.is_authenticated):
+        if (request.endpoint not in allowed_endpoints and not current_user.is_authenticated):
             return current_app.login_manager.unauthorized()
